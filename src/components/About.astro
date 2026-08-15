@@ -1,0 +1,29 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import { story } from '../data/about';
+import { portrait } from '../data/photos';
+import Photo from './Photo.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang].about;
+---
+
+<section id="about" class="mx-auto max-w-6xl px-6 py-16 md:px-10 md:py-24">
+  <p class="reveal text-stone font-mono text-[13px] tracking-wider uppercase">{t.eyebrow}</p>
+  <div class="reveal mt-4 grid gap-10 md:grid-cols-[1fr_2fr] md:gap-16">
+    <div>
+      <h2 class="font-display text-3xl leading-tight font-bold tracking-tight md:text-5xl">
+        {t.heading}
+      </h2>
+      <div class="mt-8 max-w-xs">
+        <Photo photo={portrait} lang={lang} ratio="aspect-[4/5]" />
+      </div>
+    </div>
+    <div class="text-stone max-w-2xl space-y-5 text-lg leading-relaxed">
+      {story[lang].map((p) => <p set:html={p} />)}
+    </div>
+  </div>
+</section>

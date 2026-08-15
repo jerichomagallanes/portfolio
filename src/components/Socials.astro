@@ -1,0 +1,31 @@
+---
+import { socials } from '../data/socials';
+---
+
+<ul class="flex flex-wrap gap-x-8 gap-y-4">
+  {
+    socials.map((s) => (
+      <li>
+        <a
+          href={s.href}
+          target="_blank"
+          rel="me noopener"
+          class="group hover:text-accent flex items-center gap-2.5 transition-colors"
+          aria-label={`${s.name} — ${s.handle}`}
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            class="shrink-0"
+          >
+            <path d={s.iconPath} />
+          </svg>
+          <span class="font-mono text-[13px] tracking-wider uppercase">{s.name}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

@@ -1,0 +1,91 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang].nav;
+---
+
+<div id="nav-sentinel" aria-hidden="true" class="absolute inset-x-0 top-0 h-6"></div>
+<header id="site-nav" class="site-nav sticky top-0 z-30">
+  <div class="mx-auto flex max-w-6xl items-baseline justify-between px-6 py-5 md:px-10">
+    <a href="#top" class="font-display text-lg font-extrabold tracking-tight">
+      JM<span class="text-accent">.</span>
+    </a>
+    <nav
+      class="flex items-baseline gap-3 font-mono text-[11px] tracking-wider uppercase sm:gap-5 sm:text-[13px] md:gap-9"
+    >
+      <a href="#about" class="hover:text-accent transition-colors">{t.about}</a>
+      <a href="#work" class="hover:text-accent transition-colors">{t.work}</a>
+      <a href="#contact" class="hover:text-accent transition-colors">{t.contact}</a>
+      <a
+        href={t.switchHref}
+        class="text-stone hover:text-accent border-line border-l pl-3 transition-colors sm:pl-5 md:pl-9"
+        >{t.switchLabel}</a
+      >
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label={t.themeLabel}
+        class="text-stone hover:text-accent relative size-5 self-center transition-colors"
+      >
+        <svg
+          class="theme-icon icon-moon"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+        <svg
+          class="theme-icon icon-sun"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"
+          ></path>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const nav = document.getElementById('site-nav');
+  const sentinel = document.getElementById('nav-sentinel');
+  if (nav && sentinel && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => {
+      nav.classList.toggle('scrolled', !e.isIntersecting);
+    }).observe(sentinel);
+  }
+
+  const toggle = document.getElementById('theme-toggle');
+  toggle?.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('theme', next);
+  });
+
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';
+    }
+  });
+</script>

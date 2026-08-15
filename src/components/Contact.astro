@@ -1,0 +1,46 @@
+---
+import Socials from './Socials.astro';
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang].contact;
+---
+
+<section id="contact" class="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-32">
+  <p class="reveal text-stone font-mono text-[13px] tracking-wider uppercase">{t.eyebrow}</p>
+  <h2 class="reveal font-display mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+    {t.heading}
+  </h2>
+  <p class="reveal text-stone mt-6 max-w-md leading-relaxed">
+    {t.body}
+  </p>
+  <div class="reveal mt-8">
+    <a
+      href="mailto:jericho.magallanes324@gmail.com"
+      class="group hover:text-accent inline-flex items-center gap-2.5 transition-colors"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class="shrink-0"
+      >
+        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+      </svg>
+      <span class="font-mono text-sm">jericho.magallanes324@gmail.com</span>
+    </a>
+  </div>
+  <div class="reveal mt-6">
+    <Socials />
+  </div>
+</section>

@@ -1,0 +1,60 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import type { Photo } from '../data/photos';
+
+interface Props {
+  photo: Photo;
+  lang: Lang;
+  ratio?: string;
+  delay?: number;
+  group?: string;
+  index?: number;
+}
+const { photo, lang, ratio = 'aspect-[3/4]', delay = 0, group, index } = Astro.props;
+const t = ui[lang].snapshots;
+---
+
+<figure class="reveal" style={`transition-delay: ${delay}ms`}>
+  {
+    photo.src ? (
+      <button
+        type="button"
+        class="photo-open block w-full cursor-pointer"
+        aria-label={`${t.view}: ${photo.alt[lang]}`}
+        data-src={photo.src}
+        data-alt={photo.alt[lang]}
+        data-caption={photo.caption[lang]}
+        data-group={group}
+        data-index={index}
+      >
+        <span
+          class={`photo-frame border-line bg-hover relative block overflow-hidden border ${ratio}`}
+        >
+          <img
+            src={photo.src}
+            alt={photo.alt[lang]}
+            loading="lazy"
+            decoding="async"
+            class="photo-img absolute inset-0 h-full w-full object-cover"
+          />
+        </span>
+      </button>
+    ) : (
+      <div class={`photo-frame border-line bg-hover relative overflow-hidden border ${ratio}`}>
+        <div class="text-stone absolute inset-0 flex items-center justify-center p-4 text-center">
+          <p class="font-mono text-[11px] leading-relaxed tracking-wider uppercase">
+            [ Photo needed ]<br />
+            {photo.need}
+          </p>
+        </div>
+      </div>
+    )
+  }
+  {
+    photo.caption[lang] && (
+      <figcaption class="text-stone mt-2 font-mono text-[12px] tracking-wide">
+        {photo.caption[lang]}
+      </figcaption>
+    )
+  }
+</figure>

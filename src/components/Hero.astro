@@ -1,0 +1,34 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang].hero;
+---
+
+<section id="top" class="mx-auto max-w-6xl px-6 pt-24 pb-16 md:px-10 md:pt-36 md:pb-24">
+  <p class="rise rise-1 text-stone font-mono text-[13px] tracking-wide md:text-sm">
+    34.6937° N, 135.5023° E <span class="text-accent">·</span>{' '}{t.place}
+  </p>
+  <h1
+    class="rise rise-2 font-display mt-5 leading-none font-extrabold tracking-tight whitespace-nowrap"
+    style="font-size: clamp(1.2rem, 6.9vw, 5.5rem);"
+  >
+    Jericho Isaac Magallanes
+  </h1>
+  <p class="rise rise-3 text-stone mt-7 max-w-xl text-lg leading-relaxed md:text-xl">
+    {t.tagline}
+  </p>
+  <div class="rise rise-3 mt-9 flex flex-wrap gap-6 font-mono text-sm">
+    <a
+      href="#about"
+      class="text-accent underline decoration-1 underline-offset-4 hover:decoration-2"
+    >
+      {t.ctaKnow}
+    </a>
+    <a href="#contact" class="hover:text-accent transition-colors">{t.ctaTouch}</a>
+  </div>
+  <div class="horizon bg-ink/30 mt-16 h-px md:mt-24"></div>
+</section>

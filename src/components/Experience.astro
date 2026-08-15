@@ -1,0 +1,58 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import { experience } from '../data/experience';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang].work;
+---
+
+<section id="work" class="mx-auto max-w-6xl px-6 py-16 md:px-10 md:py-24">
+  <p class="reveal text-stone font-mono text-[13px] tracking-wider uppercase">{t.eyebrow}</p>
+  <h2 class="reveal font-display mt-4 mb-10 text-3xl font-bold tracking-tight md:mb-14 md:text-5xl">
+    {t.heading}
+  </h2>
+
+  <ol class="border-line border-t">
+    {
+      experience.map((e, i) => (
+        <li
+          class="reveal rule grid gap-3 py-8 md:grid-cols-[11rem_1fr] md:gap-8"
+          style={`transition-delay: ${i * 90}ms`}
+        >
+          <div class="font-mono text-[13px]">
+            <p>{e.period[lang]}</p>
+            <p class="text-stone mt-1">{e.location[lang]}</p>
+          </div>
+          <div>
+            <h3 class="font-display text-xl font-bold tracking-tight md:text-2xl">
+              <a
+                href={e.url}
+                target="_blank"
+                rel="noopener"
+                class="group/company hover:text-accent transition-colors"
+              >
+                {e.company}
+                <span class="row-arrow text-accent ml-1 inline-block text-sm">↗</span>
+              </a>
+              <span class="text-stone ml-2 font-mono text-[13px] font-normal tracking-wider uppercase">
+                {e.role[lang]}
+              </span>
+            </h3>
+            <p class="text-stone mt-3 max-w-3xl leading-relaxed">{e.summary[lang]}</p>
+            <p class="text-stone mt-4 font-mono text-[13px]">
+              {e.stack.map((s, i) => (
+                <>
+                  {i > 0 && <span class="text-accent"> · </span>}
+                  <span>{s}</span>
+                </>
+              ))}
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>
