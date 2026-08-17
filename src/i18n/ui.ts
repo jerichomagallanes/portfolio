@@ -19,7 +19,7 @@ export const ui = {
       place: 'OSAKA',
       tagline:
         "I'm a Filipino software engineer based in Osaka, building native apps for iOS and Android.",
-      ctaKnow: 'Get to know me ↓',
+      ctaWork: 'See my work ↓',
       ctaTouch: 'Get in touch',
     },
     about: {
@@ -37,6 +37,8 @@ export const ui = {
     work: {
       eyebrow: 'Work',
       heading: 'Experience',
+      shipped: 'Shipped',
+      viewOn: 'View {app} on {store}',
     },
     contact: {
       eyebrow: 'Contact',
@@ -62,7 +64,7 @@ export const ui = {
       place: '大阪',
       tagline:
         '大阪を拠点に、iOSとAndroidのネイティブアプリを開発しているフィリピン出身のソフトウェアエンジニアです。',
-      ctaKnow: '自己紹介へ ↓',
+      ctaWork: '経歴へ ↓',
       ctaTouch: '連絡する',
     },
     about: {
@@ -80,6 +82,8 @@ export const ui = {
     work: {
       eyebrow: '経歴',
       heading: 'これまでの仕事',
+      shipped: '携わったアプリ',
+      viewOn: '{store}で{app}を見る',
     },
     contact: {
       eyebrow: '連絡先',

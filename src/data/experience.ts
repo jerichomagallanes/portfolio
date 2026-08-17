@@ -2,6 +2,16 @@ import type { Lang } from '../i18n/ui';
 
 type Localized = Record<Lang, string>;
 
+export interface AppLink {
+  /** Store display name of the app */
+  name: string;
+  /** Shown when the store name differs from what it was called during my time on it */
+  note?: Localized;
+  icon: string;
+  appStore?: string;
+  playStore?: string;
+}
+
 export interface Experience {
   company: string;
   url: string;
@@ -10,6 +20,7 @@ export interface Experience {
   period: Localized;
   summary: Localized;
   stack: string[];
+  apps?: AppLink[];
 }
 
 export const experience: Experience[] = [
@@ -24,6 +35,14 @@ export const experience: Experience[] = [
       ja: '不動産業界向けに建物の360° VRコンテンツを撮影・管理・編集できる、Spacelyの空間データプラットフォームでiOSとAndroidのネイティブアプリを開発しています。現在は主にiOSを担当。Androidでは、Spacely Photo TaskアプリのEpoxyとXMLで書かれた既存ビューのJetpack Compose移行や、360°動画再生などのメディア機能の実装を行いました。',
     },
     stack: ['Swift', 'Kotlin', 'Jetpack Compose', 'Coroutines & Flow', 'Realm', 'Retrofit'],
+    apps: [
+      {
+        name: 'Spacely Photo Task',
+        icon: '/apps/spacely-photo-task.png',
+        appStore: 'https://apps.apple.com/jp/app/spacely-photo-task/id1523973976',
+        playStore: 'https://play.google.com/store/apps/details?id=jp.co.spacely.phototask2',
+      },
+    ],
   },
   {
     company: 'Galileo',
@@ -51,5 +70,27 @@ export const experience: Experience[] = [
       ja: 'LANDBANK、Overseas Filipino Bank、RCBCなど、フィリピンの銀行向けAndroidモバイルバンキングアプリを開発しました。Kotlinによる再利用可能な通信レイヤーの構築、レガシーJavaプロジェクトのKotlin移行、コードレビュー、Google Playへのリリース対応を担当しました。',
     },
     stack: ['Kotlin', 'MVVM', 'Retrofit', 'Moshi', 'Firebase Crashlytics'],
+    apps: [
+      {
+        name: 'LANDBANK Mobile Banking',
+        icon: '/apps/landbank.png',
+        appStore: 'https://apps.apple.com/ph/app/landbank-mobile-banking/id950232162',
+        playStore: 'https://play.google.com/store/apps/details?id=com.landbank.mobilebanking',
+      },
+      {
+        name: 'OFBank Mobile Banking',
+        icon: '/apps/ofbank.png',
+        appStore: 'https://apps.apple.com/ph/app/ofbank-mobile-banking/id1396335444',
+        playStore:
+          'https://play.google.com/store/apps/details?id=ph.gov.overseasfilipinobank.mobilebanking',
+      },
+      {
+        name: 'RCBC Pulz',
+        note: { en: 'formerly RCBC Mobile', ja: '旧RCBC Mobile' },
+        icon: '/apps/rcbc.png',
+        appStore: 'https://apps.apple.com/ph/app/rcbc-pulz/id1445403196',
+        playStore: 'https://play.google.com/store/apps/details?id=com.rcbc.pulz',
+      },
+    ],
   },
 ];

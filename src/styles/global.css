@@ -173,6 +173,18 @@ body::after {
   }
 }
 
+.app-icon {
+  /* Approximates the iOS squircle mask; icons ship as square 512px sources */
+  border-radius: 22.4%;
+  filter: saturate(0.78);
+  transition: filter 0.5s ease;
+}
+@media (hover: hover) {
+  .app-entry:hover .app-icon {
+    filter: none;
+  }
+}
+
 .photo-img {
   filter: saturate(0.72) contrast(0.98);
   transition:
@@ -301,6 +313,7 @@ button:focus-visible {
   .theme-icon,
   .site-nav,
   .photo-img,
+  .app-icon,
   .snap-dot {
     transition: none;
   }
