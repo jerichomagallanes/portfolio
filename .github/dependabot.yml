@@ -9,6 +9,13 @@ updates:
     open-pull-requests-limit: 5
     labels:
       - dependencies
+    ignore:
+      # @astrojs/check peer-requires typescript "^5.0.0 || ^6.0.0", so a major
+      # bump fails `npm ci` with ERESOLVE before anything builds. Drop this
+      # entry once the Astro toolchain supports the newer major.
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
     # Grouped so a week of updates arrives as a few reviewable PRs rather than
     # one per package. Each group still has to pass CI before it can merge.
     groups:
