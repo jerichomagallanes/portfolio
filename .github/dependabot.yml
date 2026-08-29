@@ -1,0 +1,41 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    # Grouped so a week of updates arrives as a few reviewable PRs rather than
+    # one per package. Each group still has to pass CI before it can merge.
+    groups:
+      astro:
+        patterns:
+          - 'astro'
+          - '@astrojs/*'
+      tailwind:
+        patterns:
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+      fonts:
+        patterns:
+          - '@fontsource*'
+      tooling:
+        patterns:
+          - 'prettier'
+          - 'prettier-plugin-*'
+          - 'typescript'
+          - 'playwright'
+          - 'sharp'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - dependencies
+      - ci

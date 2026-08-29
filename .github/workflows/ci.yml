@@ -1,0 +1,116 @@
+name: CI
+
+# Runs on every pull request into main. Pushes to main are covered by deploy.yml,
+# which repeats these checks before it ships anything.
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build & checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup-node
+
+      # Type-checks .astro, .ts and the component props between them.
+      - name: Type check
+        run: npm run check
+
+      # Verifies formatting without rewriting files. `npm run format` fixes
+      # anything this catches.
+      - name: Format check
+        run: npm run format:check
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload built site
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: site-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  # Publishes the PR to its own Cloudflare Pages preview URL, so a change can be
+  # looked at in a real browser before it reaches the live site. Advisory only:
+  # a Cloudflare hiccup should not block merging a correct change.
+  preview:
+    name: Preview deployment
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup-node
+
+      - name: Build
+        run: npm run build
+
+      # Any --branch other than the production branch creates a preview
+      # deployment with its own stable URL, rather than touching the live site.
+      - name: Deploy preview to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4.0.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=jerichomagallanes --branch=pr-${{ github.event.pull_request.number }}
+
+      # One comment per PR, edited in place on each push, so the thread does not
+      # fill up with stale preview links.
+      - name: Comment preview URL
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const url = ${{ toJSON(steps.deploy.outputs.deployment-url) }};
+            const alias = ${{ toJSON(steps.deploy.outputs.pages-deployment-alias-url) }};
+            const marker = '<!-- cloudflare-preview -->';
+
+            const body = [
+              marker,
+              '### 🚀 Preview deployment',
+              '',
+              `**This build:** ${url || '_not available_'}`,
+              alias ? `**Latest for this PR:** ${alias}` : '',
+              '',
+              `Commit \`${context.payload.pull_request.head.sha.substring(0, 7)}\``,
+            ].filter(Boolean).join('\n');
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find((c) => c.body.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
