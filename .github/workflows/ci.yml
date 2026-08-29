@@ -51,6 +51,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    # Dependabot pull requests run with a restricted token and no access to
+    # repository secrets, so wrangler cannot authenticate and this job can only
+    # ever fail. Skipping reports an honest "skipped" instead of a red X on
+    # every dependency update. To preview a dependency bump, push the branch
+    # under your own account or re-run this workflow via workflow_dispatch.
+    if: github.actor != 'dependabot[bot]'
     permissions:
       contents: read
       pull-requests: write
