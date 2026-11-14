@@ -10,6 +10,7 @@ export const ui = {
     nav: {
       about: 'About',
       work: 'Work',
+      projects: 'Projects',
       contact: 'Contact',
       switchLabel: '日本語',
       switchHref: '/ja/',
@@ -40,6 +41,10 @@ export const ui = {
       shipped: 'Shipped',
       viewOn: 'View {app} on {store}',
     },
+    projects: {
+      eyebrow: 'Projects',
+      heading: 'On my own time',
+    },
     contact: {
       eyebrow: 'Contact',
       heading: 'Say hello!',
@@ -55,6 +60,7 @@ export const ui = {
     nav: {
       about: '自己紹介',
       work: '経歴',
+      projects: 'プロジェクト',
       contact: '連絡先',
       switchLabel: 'English',
       switchHref: '/',
@@ -84,6 +90,10 @@ export const ui = {
       heading: 'これまでの仕事',
       shipped: '携わったアプリ',
       viewOn: '{store}で{app}を見る',
+    },
+    projects: {
+      eyebrow: 'プロジェクト',
+      heading: '個人で作っているもの',
     },
     contact: {
       eyebrow: '連絡先',
