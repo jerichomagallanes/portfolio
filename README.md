@@ -40,12 +40,12 @@ src/
 ├── pages/          index.astro (EN) and ja/index.astro (JA)
 ├── layouts/        Base.astro: head, fonts, theme bootstrap
 ├── components/     One component per section, plus Photo and Lightbox
-├── data/           Typed content: bio, experience, socials, photos
+├── data/           Typed content: bio, experience, projects, socials, photos
 ├── i18n/           UI strings for both languages
 └── styles/         global.css: design tokens, themes, motion
 ```
 
-All copy lives in `src/data/` and `src/i18n/ui.ts`; components contain no hardcoded text. Adding a photo: `node scripts/photo.mjs <file>` resizes it, strips metadata, and writes it to `public/photos/` under an anonymized name.
+All copy lives in `src/data/` and `src/i18n/ui.ts`; components contain no hardcoded text. Adding a photo: `node scripts/photo.mjs <file>` resizes it, strips metadata, and writes it to `public/photos/` under an anonymized name. It takes JPEG and PNG; convert an iPhone HEIC first (`sips -s format jpeg photo.heic --out photo.jpg`). Work and personal projects share one row type (`Experience`) and one component (`WorkRow`), so a new project is a data entry in `src/data/projects.ts`.
 
 ## Deployment
 
