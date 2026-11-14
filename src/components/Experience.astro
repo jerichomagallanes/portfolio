@@ -17,6 +17,8 @@ const t = ui[lang].work;
   </h2>
 
   <ol class="border-line border-t">
-    {experience.map((e, i) => <WorkRow e={e} lang={lang} delay={i * 90} />)}
+    {experience.map((e, i) => (
+      <WorkRow e={e} lang={lang} delay={i * 90} />
+    ))}
   </ol>
 </section>

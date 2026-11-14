@@ -14,18 +14,25 @@ const t = ui[lang].nav;
     <a href="#top" class="font-display text-lg font-extrabold tracking-tight">
       JM<span class="text-accent">.</span>
     </a>
-    <nav
-      class="flex items-baseline gap-3 font-mono text-[11px] tracking-wider uppercase sm:gap-5 sm:text-[13px] md:gap-9"
-    >
-      <a href="#work" class="hover:text-accent transition-colors">{t.work}</a>
-      <a href="#projects" class="hover:text-accent transition-colors">{t.projects}</a>
-      <a href="#about" class="hover:text-accent transition-colors">{t.about}</a>
-      <a href="#contact" class="hover:text-accent transition-colors">{t.contact}</a>
+    <nav class="flex items-baseline gap-3 font-mono text-[11px] tracking-wider uppercase sm:gap-5 sm:text-[13px] md:gap-9">
+      <a href="#work" class="hover:text-accent transition-colors">
+        {t.work}
+      </a>
+      <a href="#projects" class="hover:text-accent transition-colors">
+        {t.projects}
+      </a>
+      <a href="#about" class="hover:text-accent transition-colors">
+        {t.about}
+      </a>
+      <a href="#contact" class="hover:text-accent transition-colors">
+        {t.contact}
+      </a>
       <a
         href={t.switchHref}
         class="text-stone hover:text-accent border-line border-l pl-3 transition-colors sm:pl-5 md:pl-9"
-        >{t.switchLabel}</a
       >
+        {t.switchLabel}
+      </a>
       <button
         id="theme-toggle"
         type="button"
@@ -59,9 +66,7 @@ const t = ui[lang].nav;
           aria-hidden="true"
         >
           <circle cx="12" cy="12" r="4"></circle>
-          <path
-            d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"
-          ></path>
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"></path>
         </svg>
       </button>
     </nav>
