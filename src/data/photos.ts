@@ -19,6 +19,24 @@ export const portrait: Photo = {
 
 export const snapshots: Photo[] = [
   {
+    src: '/photos/39a10859.jpg',
+    alt: {
+      en: 'A big three-ball snowman grinning in the snow at Tomamu, with the resort towers behind it',
+      ja: 'トマムの雪原でにっこり笑う大きな雪だるま、後ろにはリゾートのタワー',
+    },
+    caption: { en: 'Tomamu, 2023', ja: 'トマム、2023' },
+    need: 'Winter. A snow trip',
+  },
+  {
+    src: '/photos/4354c2ae.jpg',
+    alt: {
+      en: 'The carved wooden spires of the Sanctuary of Truth in Pattaya, framed by trees',
+      ja: '木々の間から見える、パタヤのサンクチュアリ・オブ・トゥルースの木彫りの尖塔',
+    },
+    caption: { en: 'Pattaya, 2024', ja: 'パタヤ、2024' },
+    need: 'Travel. A favorite view from a trip',
+  },
+  {
     src: '/photos/afcc9e4e.jpg',
     alt: {
       en: 'A hiker on a rocky ridge above a cloud-filled valley in the Nagano mountains',
@@ -28,30 +46,12 @@ export const snapshots: Photo[] = [
     need: 'Travel. A favorite view from a trip',
   },
   {
-    src: '/photos/99d74ff0.jpg',
+    src: '/photos/3626f94d.jpg',
     alt: {
-      en: 'Sitting on the rocks by the moat with Osaka Castle behind',
-      ja: '大阪城を背に、堀のそばの岩に座っているところ',
+      en: 'Jericho in a navy hanbok smiling in the courtyard of Gyeongbokgung Palace in Seoul',
+      ja: 'ソウルの景福宮の庭で、紺色の韓服を着て笑うJericho',
     },
-    caption: { en: 'Osaka Castle, 2026', ja: '大阪城、2026' },
-    need: 'Osaka. A street or neighborhood you like',
-  },
-  {
-    src: '/photos/cc1ac073.jpg',
-    alt: {
-      en: 'Home-cooked kare-kare: fresh ingredients laid out, and the finished plate with crispy pork and vegetables',
-      ja: '自炊した料理：並べた食材と、豚肉と野菜を盛り付けた一皿',
-    },
-    caption: { en: 'From my kitchen', ja: '自炊ごはん' },
-    need: 'Food. Something you cooked',
-  },
-  {
-    src: '/photos/31702558.jpg',
-    alt: {
-      en: 'The sea framed by the mouth of a coastal cave in Kanagawa',
-      ja: '神奈川、海食洞の入り口から見える海',
-    },
-    caption: { en: 'Kanagawa, 2026', ja: '神奈川、2026' },
-    need: 'Day trip. A train, coast, or trail shot',
+    caption: { en: 'Seoul, 2026', ja: 'ソウル、2026' },
+    need: 'Travel. A city you visited',
   },
 ];
