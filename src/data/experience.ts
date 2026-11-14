@@ -20,6 +20,8 @@ export interface Experience {
   period: Localized;
   summary: Localized;
   stack: string[];
+  /** Who else shaped it, when that is worth saying */
+  credit?: Localized;
   apps?: AppLink[];
 }
 
