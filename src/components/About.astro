@@ -23,7 +23,9 @@ const t = ui[lang].about;
       </div>
     </div>
     <div class="text-stone max-w-2xl space-y-5 text-lg leading-relaxed">
-      {story[lang].map((p) => <p set:html={p} />)}
+      {story[lang].map((p) => (
+        <p set:html={p} />
+      ))}
     </div>
   </div>
 </section>
